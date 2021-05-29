@@ -53,7 +53,6 @@ def insertVal():
         prediction = ['Setosa', 'Versicolor', 'Virginica'][(y_pred[0])]
         results = Iris.insertValues(userid,sl,sw,pl,pw,prediction)
         values = Iris.getValues(userid)
-        prediction = "The predicted flower species is " + prediction +"."
         return render_template("irisPredictionPage.html",user=user,userid=userid,values=values,prediction=prediction)
 
 @app.route('/logout')
