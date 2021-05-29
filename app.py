@@ -43,7 +43,7 @@ def insertVal():
     sw = request.form['sw']
     pl = request.form['pl']
     pw = request.form['pw']    
-    patternVal = re.compile('(^0\.5$)|(^[1-9][0-9]*(\.[05])?$)')    
+    patternVal = re.compile('^[+]?\d+([.]\d+)?$')    
     if (patternVal.match(sl) == None) or (patternVal.match(sw)  == None) or (patternVal.match(pl)  == None )or (patternVal.match(pw) == None) :
         values = Iris.getValues(userid)
         return render_template("irisPredictionPage.html",user=user,userid=userid,values=values,prediction="Please reenter valid values.")
