@@ -1,0 +1,197 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">    <title>Iris Prediction</title>
+
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        text-align: center;
+        background-image: url('/asd.jpg');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;}
+      
+      
+            div.form
+            { display: block;
+                text-align: center;}
+
+                form{
+        display: inline-block;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: left;
+        }      
+
+      /* Full-width input fields */
+      input[type=text], input[type=password] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+      }
+      
+      /* Set a style for all buttons */
+      button {
+        background-color: #04AA6D;
+        color: white;
+        padding: 14px 20px;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+      }
+      
+      .close {
+        background-color: #c00000;
+        color: white;
+}
+
+.remove {
+        background-color: #c97304;
+        color: rgb(255, 255, 255);
+        width: 100%;
+        padding: 14px 20px;
+        margin: 8px 0;
+}
+
+#irisTable {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#irisTable td {
+  border: 1px solid #ddd;
+  padding: 3px;
+}
+
+
+
+
+
+#irisTable tr:nth-child(even){background-color: #f2f2f2;  
+  padding: 3px
+}
+
+
+#irisTable th {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 3px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+
+
+.header {
+  padding: 60px;
+  text-align: center;
+  background: #2c4640;
+  color: white;
+  font-size: 30px;
+}
+.pred {
+  
+  padding: 60px;
+  text-align: center;
+  color: rgb(0, 0, 0);
+  font-size: 25px;
+}
+      
+
+
+      </style>
+<div class="header">
+  <h1>SGUS Project</h1>
+  <p>WELCOME {{user}}!</p>
+</div>      
+      
+</style>
+
+
+  </head>
+  <div class="pred">
+    <body>
+ {%if prediction%}
+        {{prediction}}
+        {% else %}
+        Please enter iris flower parameters.
+        {% endif %}
+      </body>
+
+    </div>
+
+    <form method = "post" action = "http://127.0.0.1:5000/iris">
+        <p></p>Sepal Length<p></p>
+        <label for= "Sepal Length"></label>
+        <input type="text" name ="sl">
+        <p></p>
+        Sepal Width
+        <label for= "Sepal Width"></label>
+        <input type="text" name ="sw">
+        <p></p>
+        <p></p>Petal Length<p></p>
+        <label for= "Petal Length"></label>
+        <input type="text" name ="pl">
+        <p></p>
+        <p></p>Petal Width<p></p>
+        <label for= "Petal Width"></label>
+        <input type="text" name ="pw">
+        <p></p>
+        <button type="submit" class="signIn">Predict</button>
+        <input type="hidden" name="userid" value={{userid}}>
+        <input type="hidden" name="username" value={{user}}>
+
+    </form>
+    <p></p>
+    <form method = "post" action = "http://127.0.0.1:5000/iris/delete">
+      <button type="submit" class = "remove" value = "Remove Latest Entry">Remove Latest Entry</button>
+      <input type="hidden" name="userid" value={{userid}}>
+      <input type="hidden" name="username" value={{user}}>       
+      <p></p>
+  </form>
+    <table id="irisTable">
+      <tr>
+        <th>Sepal Length</th>
+        <th>Sepal Width</th>
+        <th>Petal Length</th>
+        <th>Petal Width</th>
+        <th>Prediction</th>
+        <th>Timestamp</th>
+     </tr>
+      <tr>
+        {% for x in values%}
+        <td>{{x['sepalLength']}}</td>                    
+        <td>{{x['sepalWidth']}}</td>                    
+        <td>{{x['petalLength']}}</td>                    
+        <td>{{x['petalWidth']}}</td>                    
+        <td>{{x['prediction']}}</td>  
+        <td>{{x["DATE_FORMAT(InsertionDate, '%d %M %Y %T')"]}}</td>                    
+        </tr>         
+        {%  endfor %}
+      </table>
+       <p></p>
+      <p></p>
+      <p></p>
+      <p></p> 
+
+      <form action="http://127.0.0.1:5000/logout">
+        <button type="submit"  class ="close">LOGOUT</button>
+      </form>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+      </body>
+
+</html>
