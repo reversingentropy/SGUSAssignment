@@ -122,8 +122,16 @@
   </head>
   <div class="pred" style="color:rgb(51, 255, 245)">
     <body>
- {%if prediction%}
+ {%if prediction == 'Setosa'%}
         {{prediction}}
+      "The predicted flower species is " + {{prediction}} +"."
+      <img src="https://upload.wikimedia.org/wikipedia/commons/5/56/Kosaciec_szczecinkowaty_Iris_setosa.jpg" alt="Trulli" width="400" height="400">
+        {% elif prediction == 'Versicolor' %}
+      "The predicted flower species is " + {{prediction}} +"."
+      <img src="https://daylily-phlox.eu/wp-content/uploads/2019/09/Iris-Cat-Mousam.jpg" alt="Trulli" width="400" height="400">
+        {% elif prediction == 'Virginica' %}
+      "The predicted flower species is " + {{prediction}} +"."
+      <img src="https://s3.amazonaws.com/eit-planttoolbox-prod/media/images/Iris-virginica--Justin-Meissen--CC-BY-SA.jpg" alt="Trulli" width="400" height="400">
         {% else %}
         Please enter iris flower parameters.
         {% endif %}
